@@ -10,24 +10,29 @@
 
 body {
   min-height: 100svh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: linear-gradient(160deg, #ff9ec4, #ffd6e8);
   font-family: Arial, sans-serif;
-  overflow: hidden;
-  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* 🔥 allow scroll */
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px 16px 60px; /* bottom space so buttons never cut off */
+  display: flex;
+  justify-content: center;
 }
 
 .card {
   background: white;
   width: 100%;
-  max-width: 360px;
   border-radius: 24px;
   padding: 22px 18px 26px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.15);
   text-align: center;
-  z-index: 2;
   animation: fadeUp 0.6s ease;
 }
 
@@ -61,10 +66,8 @@ h2 {
 
 .buttons {
   display: flex;
-  justify-content: center;
   gap: 12px;
-  position: relative;
-  height: 60px;
+  margin-top: 10px;
 }
 
 button {
@@ -90,10 +93,9 @@ button {
 }
 
 .heart {
-  position: absolute;
+  position: fixed;
   font-size: 20px;
   animation: float 4s linear infinite;
-  z-index: 1;
   pointer-events: none;
 }
 
@@ -108,15 +110,17 @@ button {
 
 <audio id="bgMusic" src="music.mp3" loop></audio>
 
-<div class="card">
-  <img src="photo.jpg" alt="Us ❤️">
-  <h1>Baby 💖</h1>
-  <p>Every moment with you is my favorite memory.</p>
-  <h2>Will you be my Valentine?</h2>
+<div class="wrapper">
+  <div class="card">
+    <img src="photo.jpg" alt="Us ❤️">
+    <h1>Baby 💖</h1>
+    <p>Every moment with you is my favorite memory.</p>
+    <h2>Will you be my Valentine?</h2>
 
-  <div class="buttons">
-    <button id="yesBtn">YES 💘</button>
-    <button id="noBtn">No 🙈</button>
+    <div class="buttons">
+      <button id="yesBtn">YES 💘</button>
+      <button id="noBtn">No 🙈</button>
+    </div>
   </div>
 </div>
 
@@ -125,16 +129,14 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const music = document.getElementById("bgMusic");
 
-// Mobile-friendly music start
 window.addEventListener("load", () => {
   music.play().catch(() => {
     document.body.addEventListener("touchstart", () => music.play(), { once: true });
   });
 });
 
-// Move NO button safely (within card area)
 function moveButton() {
-  const x = Math.random() * 80 - 40;
+  const x = Math.random() * 60 - 30;
   const y = Math.random() * 30 - 15;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
@@ -153,7 +155,6 @@ yesBtn.addEventListener("click", () => {
   `;
 });
 
-// Floating hearts
 function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
@@ -163,10 +164,11 @@ function createHeart() {
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 4000);
 }
-setInterval(createHeart, 400);
+setInterval(createHeart, 500);
 </script>
 
 </body>
 </html>
+
 
 
