@@ -2,75 +2,77 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For Sneha ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>For Baby ❤️</title>
 
 <style>
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ff9ec4, #ffd6e8);
+  background: linear-gradient(160deg, #ff9ec4, #ffd6e8);
   font-family: Arial, sans-serif;
   overflow: hidden;
-  text-align: center;
-  padding: 15px;
+  padding: 20px;
 }
 
 .card {
   background: white;
-  padding: 22px;
-  border-radius: 22px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   width: 100%;
-  max-width: 380px;
-  position: relative;
+  max-width: 360px;
+  border-radius: 24px;
+  padding: 22px 18px 26px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  text-align: center;
   z-index: 2;
-  animation: popIn 0.6s ease;
+  animation: fadeUp 0.6s ease;
 }
 
-@keyframes popIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@keyframes fadeUp {
+  from { transform: translateY(15px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 img {
   width: 100%;
-  border-radius: 16px;
-  margin-bottom: 12px;
+  border-radius: 18px;
+  margin-bottom: 14px;
 }
 
 h1 {
   color: #ff4d88;
   font-size: 24px;
-  margin: 6px 0;
-}
-
-h2 {
-  font-size: 20px;
-  margin: 12px 0;
+  margin-bottom: 6px;
 }
 
 p {
-  color: #555;
   font-size: 14px;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 18px;
 }
 
 .buttons {
-  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
   position: relative;
-  height: 90px;
+  height: 60px;
 }
 
 button {
-  padding: 14px 22px;
+  flex: 1;
   border: none;
   border-radius: 40px;
   font-size: 16px;
+  padding: 14px 0;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -84,25 +86,20 @@ button {
 
 #noBtn {
   background: #eee;
-  position: absolute;
+  position: relative;
 }
 
 .heart {
   position: absolute;
-  font-size: 22px;
+  font-size: 20px;
   animation: float 4s linear infinite;
   z-index: 1;
+  pointer-events: none;
 }
 
 @keyframes float {
   from { transform: translateY(100vh); opacity: 1; }
   to { transform: translateY(-10vh); opacity: 0; }
-}
-
-/* Extra small phones */
-@media (max-width: 350px) {
-  h1 { font-size: 20px; }
-  h2 { font-size: 18px; }
 }
 </style>
 </head>
@@ -113,7 +110,7 @@ button {
 
 <div class="card">
   <img src="photo.jpg" alt="Us ❤️">
-  <h1>Sneha 💖</h1>
+  <h1>Baby 💖</h1>
   <p>Every moment with you is my favorite memory.</p>
   <h2>Will you be my Valentine?</h2>
 
@@ -135,37 +132,41 @@ window.addEventListener("load", () => {
   });
 });
 
-// Make NO button run on tap (not just hover)
+// Move NO button safely (within card area)
 function moveButton() {
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 60 - 30;
+  const x = Math.random() * 80 - 40;
+  const y = Math.random() * 30 - 15;
   noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
-noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("touchstart", moveButton);
+noBtn.addEventListener("mouseover", moveButton);
 
 yesBtn.addEventListener("click", () => {
   document.body.innerHTML = `
-    <div style="text-align:center;color:white;padding:40px">
-      <h1 style="font-size:28px">BEST DECISION EVER 💖</h1>
-      <h2>You just made me the happiest person alive 🥹</h2>
-      <p>I can't wait to make more memories with you, Sneha ❤️</p>
+    <div style="display:flex;justify-content:center;align-items:center;height:100svh;text-align:center;color:white;background:linear-gradient(160deg,#ff4d88,#ff9ec4);padding:30px;">
+      <div>
+        <h1 style="font-size:28px;margin-bottom:12px;">BEST DECISION EVER 💖</h1>
+        <h2>You just made me the happiest person alive 🥹</h2>
+        <p>I can't wait to make more memories with you, Baby ❤️</p>
+      </div>
     </div>
   `;
 });
 
+// Floating hearts
 function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
   heart.innerHTML = "💖";
   heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  heart.style.fontSize = Math.random() * 18 + 16 + "px";
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 4000);
 }
-setInterval(createHeart, 300);
+setInterval(createHeart, 400);
 </script>
 
 </body>
 </html>
+
 
