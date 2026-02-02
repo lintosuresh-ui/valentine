@@ -129,20 +129,37 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const music = document.getElementById("bgMusic");
 
+// 🎵 Music start
 window.addEventListener("load", () => {
   music.play().catch(() => {
     document.body.addEventListener("touchstart", () => music.play(), { once: true });
   });
 });
 
-function moveButton() {
-  const x = Math.random() * 60 - 30;
-  const y = Math.random() * 30 - 15;
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-}
-noBtn.addEventListener("touchstart", moveButton);
-noBtn.addEventListener("mouseover", moveButton);
+// 💀 NO BUTTON ESCAPE MODE
+function moveButtonCrazy() {
+  const maxX = window.innerWidth * 0.6;
+  const maxY = window.innerHeight * 0.4;
 
+  const x = Math.random() * maxX - maxX / 2;
+  const y = Math.random() * maxY - maxY / 2;
+
+  noBtn.style.position = "relative";
+  noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*30-15}deg) scale(${1 + Math.random()*0.3})`;
+}
+
+// Runs when finger gets close (mobile)
+noBtn.addEventListener("touchstart", moveButtonCrazy);
+
+// Runs when mouse gets close (desktop)
+noBtn.addEventListener("mouseover", moveButtonCrazy);
+
+// Also randomly moves every second so it NEVER stays still
+setInterval(() => {
+  moveButtonCrazy();
+}, 1000);
+
+// 💖 YES BUTTON
 yesBtn.addEventListener("click", () => {
   document.body.innerHTML = `
     <div style="display:flex;justify-content:center;align-items:center;height:100svh;text-align:center;color:white;background:linear-gradient(160deg,#ff4d88,#ff9ec4);padding:30px;">
@@ -155,6 +172,7 @@ yesBtn.addEventListener("click", () => {
   `;
 });
 
+// Floating hearts
 function createHeart() {
   const heart = document.createElement("div");
   heart.classList.add("heart");
@@ -166,9 +184,3 @@ function createHeart() {
 }
 setInterval(createHeart, 500);
 </script>
-
-</body>
-</html>
-
-
-
